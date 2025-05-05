@@ -29,21 +29,26 @@ public class UserController {
      * else the method will a new password.
      */
     @PostMapping
-    public ResponseEntity<?> createUser(@RequestBody User user) {
-
-        Optional<User> userOptional =  userRepository.findByUsername(user.getUsername());
-        // Check if the user already exists
-        if(userOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(user.getUsername()+" "+messagesExceptionsUser.USERNAME_ALREADY_EXISTS);
-        }else{
-            // If the user does not exist, create a new user in service
-            boolean responseUser = userService.createUser(user);
-            if (responseUser) {
-                return ResponseEntity.status(HttpStatus.CREATED).body(messagesExceptionsUser.USER_CREATED);
-            } else {
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(messagesExceptionsUser.USER_ERROR_CREATING);
+    public ResponseEntity<String> createUser(@RequestBody User user) {
+        try {
+            Optional<User> userOptional =  userRepository.findByUsername(user.getUsername());
+            // Check if the user already exists
+            if(userOptional.isPresent()) {
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(user.getUsername()+" "+messagesExceptionsUser.USERNAME_ALREADY_EXISTS);
+            }else{
+                // If the user does not exist, create a new user in service
+                boolean responseUser = userService.createUser(user);
+                if (responseUser) {
+                    return ResponseEntity.status(HttpStatus.CREATED).body(messagesExceptionsUser.USER_CREATED);
+                } else {
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(messagesExceptionsUser.USER_ERROR_CREATING);
+                }
             }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
+
+
     }
 
 

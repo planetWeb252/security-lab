@@ -11,7 +11,7 @@ public class UserService {
 
     @Autowired
     private  UserRepository userRepository;
-
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     public boolean createUser(User user) {
@@ -23,6 +23,7 @@ public class UserService {
             userRepository.save(user);
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
