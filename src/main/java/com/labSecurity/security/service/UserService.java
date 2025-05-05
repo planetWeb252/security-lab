@@ -20,7 +20,7 @@ public class UserService {
             User newuser = new User();
             newuser.setUsername(user.getUsername());
             newuser.setPassword(passwordEncoder.encode(user.getPassword()));
-            userRepository.save(user);
+            userRepository.save(newuser);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
