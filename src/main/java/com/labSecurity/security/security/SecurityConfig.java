@@ -20,7 +20,11 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/api/users").permitAll()
+                .authorizeHttpRequests(auth ->
+                        auth.requestMatchers("/api/creationuser/**").permitAll()
+                        .requestMatchers("/api/basic/**").permitAll()
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/moderator").hasRole("MODERATOR")
                         .anyRequest().authenticated());
 
         return http.build();

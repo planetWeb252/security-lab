@@ -1,4 +1,4 @@
-package com.labSecurity.security.controllers;
+package com.labSecurity.security.controllers.userController;
 
 import com.labSecurity.security.exceptions.UserExceptions.messagesExceptionsUser;
 import com.labSecurity.security.models.User;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/users")
+@RequestMapping("api/creationuser")
 public class UserController {
     private final UserService userService;
     private final UserRepository userRepository;
@@ -24,10 +24,6 @@ public class UserController {
     }
 
 
-    /**
-     * Create a new user, if the user already exists, return a 200 OK response
-     * else the method will a new password.
-     */
     @PostMapping
     public ResponseEntity<String> createUser(@RequestBody User user) {
         try {
