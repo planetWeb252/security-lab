@@ -1,4 +1,4 @@
-package com.labSecurity.security.controllers;
+package com.labSecurity.security.controllers.routePublicController;
 
 import com.labSecurity.security.models.User;
 import com.labSecurity.security.repository.UserRepository;
@@ -8,20 +8,19 @@ import com.labSecurity.security.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/login")
-public class loginController {
+public class loginPublicController {
     private final UserRepository userRepository;
     private final UserService userService;
     private final JwtServices jwtServices;
 
     @Autowired
-    public loginController(UserRepository userRepository,UserService userService, JwtServices jwtServices) {
+    public loginPublicController(UserRepository userRepository, UserService userService, JwtServices jwtServices) {
         this.userRepository = userRepository;
         this.userService = userService;
         this.jwtServices = jwtServices;

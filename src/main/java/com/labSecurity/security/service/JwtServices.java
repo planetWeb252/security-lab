@@ -18,7 +18,7 @@ public class JwtServices {
         // 1 hour
         return JWT.create()
                 .withSubject(username)
-                .withClaim("roles", "LOGIN")
+                .withClaim("roles", "ROLE_LOGIN")
                 .withIssuedAt(new Date())
                 .withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000)) // 1 hour
                 .sign(Algorithm.HMAC256(SECRET));

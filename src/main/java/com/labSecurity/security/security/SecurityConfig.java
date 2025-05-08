@@ -20,8 +20,9 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers("/api/creationuser/**").permitAll()
-                                .requestMatchers("/api/basic/**").permitAll()
+                                .requestMatchers("/api/public/**").permitAll()
                                 .requestMatchers("/api/login").permitAll()
+                                .requestMatchers("/api/routeRequiredAuth/**").authenticated()
                                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/api/moderator").hasRole("MODERATOR")
                                 .anyRequest().authenticated());

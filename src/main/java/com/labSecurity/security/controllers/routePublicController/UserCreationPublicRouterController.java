@@ -1,4 +1,4 @@
-package com.labSecurity.security.controllers.userController;
+package com.labSecurity.security.controllers.routePublicController;
 
 import com.labSecurity.security.exceptions.UserExceptions.messagesExceptionsUser;
 import com.labSecurity.security.models.User;
@@ -15,10 +15,10 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("api/creationuser")
-public class UserController {
+public class UserCreationPublicRouterController {
     private final UserService userService;
     private final UserRepository userRepository;
-    public UserController(UserService userService, UserRepository userRepository) {
+    public UserCreationPublicRouterController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
         this.userRepository = userRepository;
     }

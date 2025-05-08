@@ -1,4 +1,4 @@
-package com.labSecurity.security.controllers.adminController;
+package com.labSecurity.security.controllers.routeProtectedController;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
