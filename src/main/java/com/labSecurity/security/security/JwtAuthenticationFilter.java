@@ -1,7 +1,7 @@
 package com.labSecurity.security.security;
 
 import com.labSecurity.security.service.JwtServices;
-import com.labSecurity.security.service.UserService;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,18 +22,21 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
-@Component // This annotation makes the filter a Spring bean specific to the application context
+@Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtServices jwtService;
 
-    @Autowired
-    private UserService userService;
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+
+
+
+
 
         final String authHeader = request.getHeader("Authorization");
 
@@ -54,6 +58,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // If the token is valid, extract the username and roles
         String username = jwtService.extractUsername(token);
         String rolesString = jwtService.extractRoles(token);
+        System.out.println(rolesString);
 
         // Convert the roles string to a list of Spring Security authorities
         Collection<GrantedAuthority> authorities = extractAuthorities(rolesString);

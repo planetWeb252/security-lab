@@ -4,24 +4,26 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Service
 public class JwtServices {
     private static final String SECRET = "@Secret_Key";
 
-    public String generateToken(String username) {
-        // 1 hour
+    public String generateToken(String username, String role) {
+        System.out.println(username+" "+role);
         return JWT.create()
                 .withSubject(username)
-                .withClaim("roles", "ROLE_LOGIN")
+                .withClaim("roles", role)
                 .withIssuedAt(new Date())
                 .withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000)) // 1 hour
                 .sign(Algorithm.HMAC256(SECRET));
+
     }
 
     public boolean validateToken(String token) {

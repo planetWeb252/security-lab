@@ -5,13 +5,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/admin")
-public class AdminController {
-
+@RestController@RequestMapping("/moderator")
+public class ModeratorController {
 
     @GetMapping("/hello")
     public ResponseEntity<String> hello() {
-        return ResponseEntity.ok("Hello from AdminController");
+
+            return ResponseEntity.ok("Hello from ModeratorController");
+
     }
+
+
 }

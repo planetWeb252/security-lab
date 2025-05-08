@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/creationuser")
+@RequestMapping("api/creationUser")
 public class UserCreationPublicRouterController {
     private final UserService userService;
     private final UserRepository userRepository;
@@ -25,7 +25,8 @@ public class UserCreationPublicRouterController {
 
 
     @PostMapping
-    public ResponseEntity<String> createUser(@RequestBody User user) {
+    public ResponseEntity<?> createUser(@RequestBody User user) {
+        System.out.println("User creation request: " + user);
         try {
             Optional<User> userOptional =  userRepository.findByUsername(user.getUsername());
             // Check if the user already exists

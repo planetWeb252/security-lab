@@ -7,14 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/routeRequiredAuth")
+@RequestMapping("/routeRequiredAuth")
 public class routeRequiredAuth {
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-
-    public routeRequiredAuth(JwtAuthenticationFilter jwtAuthenticationFilter) {
-        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
-    }
 
 
     @PostMapping("/authenticated")
