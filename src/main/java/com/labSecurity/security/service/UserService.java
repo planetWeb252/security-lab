@@ -27,4 +27,18 @@ public class UserService {
             return false;
         }
     }
+
+
+    public boolean checkPassword(User user, String password) {
+        return passwordEncoder.matches(password, user.getPassword());
+    }
+
+
+
+
+
+
+
+
+
 }

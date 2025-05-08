@@ -13,8 +13,6 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
 
-
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -22,10 +20,11 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers("/api/creationuser/**").permitAll()
-                        .requestMatchers("/api/basic/**").permitAll()
-                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/api/moderator").hasRole("MODERATOR")
-                        .anyRequest().authenticated());
+                                .requestMatchers("/api/basic/**").permitAll()
+                                .requestMatchers("/api/login").permitAll()
+                                .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                                .requestMatchers("/api/moderator").hasRole("MODERATOR")
+                                .anyRequest().authenticated());
 
         return http.build();
     }

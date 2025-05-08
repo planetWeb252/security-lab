@@ -11,7 +11,9 @@ public class ModeratorController {
 
     @GetMapping("/hello")
     public ResponseEntity<String> hello() {
-        return ResponseEntity.ok("Hello from ModeratorController");
+
+            return ResponseEntity.ok("Hello from ModeratorController");
+
     }
 
 
