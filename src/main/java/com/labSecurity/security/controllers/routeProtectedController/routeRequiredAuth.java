@@ -1,19 +1,26 @@
 package com.labSecurity.security.controllers.routeProtectedController;
 
+
 import com.labSecurity.security.models.User;
+import com.labSecurity.security.security.JwtAuthenticationFilter;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/routeRequiredAuth")
 public class routeRequiredAuth {
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    @RequestMapping("/authenticated")
+
+    public routeRequiredAuth(JwtAuthenticationFilter jwtAuthenticationFilter) {
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+    }
+
+
+    @PostMapping("/authenticated")
     public ResponseEntity<?> authenticated(@RequestBody User user) {
-
-        return "This route is protected and requires authentication.";
+        String username = user.getUsername();
+        return ResponseEntity.ok("Hello " + username + ", this route is protected and you are authenticated.");
     }
 
 }
