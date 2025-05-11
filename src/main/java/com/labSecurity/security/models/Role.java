@@ -14,6 +14,9 @@ public class Role {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private Roles_Enum name;
+    private Roles_enum name;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

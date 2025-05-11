@@ -1,7 +1,6 @@
 package com.labSecurity.security.controllers.routePublicController;
 
 
-import com.labSecurity.security.models.Roles_Enum;
 import com.labSecurity.security.models.User;
 import com.labSecurity.security.repository.UserRepository;
 import com.labSecurity.security.service.DTO.UserResponseDTO;
@@ -12,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -37,7 +35,7 @@ public class loginPublicController {
             User userFound = userOptional.get();
             if (userService.checkPassword(userFound, user.getPassword())) {
 
-                String token = jwtServices.generateToken(userFound.getUsername(), user.getRole().toString());
+                String token = jwtServices.generateToken(userFound.getUsername(), user.getRole());
                 UserResponseDTO userResponseDTO = new UserResponseDTO();
                 userResponseDTO.setUsername(user.getUsername());
                 userResponseDTO.setToken(token);

@@ -1,15 +1,11 @@
 package com.labSecurity.security.service;
 
-import com.labSecurity.security.models.Role;
 import com.labSecurity.security.models.User;
-import com.labSecurity.security.repository.RolesRepository;
+import com.labSecurity.security.repository.RoleRepository;
 import com.labSecurity.security.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Collection;
 
 @Service
 public class UserService {
@@ -19,17 +15,25 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
-    private RolesRepository rolesRepository;
+    private RoleRepository roleRepository;
 
     public boolean createUser(User user) {
         try {
-            System.out.println(user);
+
             // set the user properties
             User newuser = new User();
             newuser.setUsername(user.getUsername());
             newuser.setPassword(passwordEncoder.encode(user.getPassword()));
-
             userRepository.save(newuser);
+            // Assign the  role to the user
+            user.getRole().forEach(role -> {
+                // Find the id by its Username
+                User userId = userRepository.findIdByUsername(user.getUsername());
+                role.setUser(userId);
+                // Save the role
+                roleRepository.save(role);
+            });
+
             return true;
         } catch (Exception e) {
             e.printStackTrace();

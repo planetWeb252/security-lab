@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
@@ -57,11 +58,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         // If the token is valid, extract the username and roles
         String username = jwtService.extractUsername(token);
-        String rolesString = jwtService.extractRoles(token);
-        System.out.println(rolesString);
+        List<String> roles = jwtService.extractRoles(token);
+
 
         // Convert the roles string to a list of Spring Security authorities
-        Collection<GrantedAuthority> authorities = extractAuthorities(rolesString);
+        Collection<GrantedAuthority> authorities = roles.stream()
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
 
         // Create an Authentication object with user information
         UsernamePasswordAuthenticationToken authentication =
