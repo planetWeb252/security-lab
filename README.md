@@ -27,18 +27,23 @@ Este proyecto es un laboratorio práctico diseñado para aprender a implementar 
    mvn spring-boot:run
    ```
 ---
+
 ## 📂 Estructura del Proyecto
+
+```text
 src
 └── main
-├── java
-│ └── com.securitylab
-│ ├── auth # Registro y login de usuarios
-│ ├── config # Configuración de seguridad y JWT
-│ ├── controller # Controladores protegidos y públicos
-│ ├── user # Modelo de Usuario y roles
-│ └── SecurityLabApp # Clase principal
-└── resources
-└── application.properties
+    ├── java
+    │   └── com.securitylab
+    │       ├── auth            # Registro y login de usuarios
+    │       ├── config          # Configuración de seguridad y JWT
+    │       ├── controller      # Controladores protegidos y públicos
+    │       ├── user            # Modelo de Usuario y roles
+    │       └── SecurityLabApp  # Clase principal
+    └── resources
+        └── application.properties
+´´´
+```
 ---
 ## 🔑 Endpoints disponibles
 | Método | Endpoint                | Descripción                               |
