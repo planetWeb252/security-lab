@@ -30,7 +30,7 @@ public class SecurityConfig {
                         auth
                                 .requestMatchers("/api/creationUser","api/login","api/public").permitAll()
                                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                                .requestMatchers("/routeRequiredAuth/authenticated").authenticated()
+                                .requestMatchers("/routeRequiredAuth/authenticated").hasRole("USER")
 
 
                 )

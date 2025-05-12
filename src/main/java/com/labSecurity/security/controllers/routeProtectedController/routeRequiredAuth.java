@@ -16,7 +16,7 @@ import java.util.Collection;
 public class routeRequiredAuth {
 
 
-    @PostMapping("/authenticated")
+    @GetMapping("/authenticated")
     public ResponseEntity<?> authenticated(Authentication authentication) {
         if (authentication == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No autorizado");
